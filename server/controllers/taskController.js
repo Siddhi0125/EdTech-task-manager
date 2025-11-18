@@ -71,17 +71,34 @@ exports.updateTask = async (req, res, next) => {
 // DELETE /tasks/:id
 exports.deleteTask = async (req, res, next) => {
   try {
-    const { id: userId } = req.user;
+    const { id: userId, role } = req.user;
     const { id } = req.params;
-
+    console.debug('[deleteTask] userId:', userId, 'taskId:', id);
     const task = await Task.findById(id);
     if (!task) return res.status(404).json({ success: false, message: 'Task not found' });
 
+    console.debug('[deleteTask] task.userId:', task.userId.toString());
     if (task.userId.toString() !== userId) {
-      return res.status(403).json({ success: false, message: 'Not allowed to delete task' });
+      // allow teacher to delete tasks of their assigned students
+      if (role === 'teacher') {
+        const owner = await User.findById(task.userId).select('teacherId');
+        const ownerTeacherId = owner && owner.teacherId ? owner.teacherId.toString() : null;
+        console.debug('[deleteTask] ownerTeacherId:', ownerTeacherId);
+        if (ownerTeacherId === userId) {
+          // teacher is allowed to delete this student's task
+          console.debug('[deleteTask] teacher allowed to delete student task');
+        } else {
+          console.warn('[deleteTask] permission denied - teacher not assigned to student', { authUser: userId, owner: task.userId.toString(), ownerTeacherId });
+          return res.status(403).json({ success: false, message: 'Not allowed to delete task' });
+        }
+      } else {
+        console.warn('[deleteTask] permission denied - owner mismatch', { authUser: userId, owner: task.userId.toString() });
+        return res.status(403).json({ success: false, message: 'Not allowed to delete task' });
+      }
     }
 
-    await task.remove();
+    // use model-level delete to avoid depending on document instance methods
+    await Task.findByIdAndDelete(id);
     res.json({ success: true, message: 'Task deleted successfully' });
   } catch (err) {
     next(err);
