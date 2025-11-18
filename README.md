@@ -99,10 +99,10 @@ A full-stack application for managing learning tasks with role-based access cont
 
 ## AI Assistance Disclosure
 
-This project was developed with assistance from AI tools for code generation and debugging. Specifically:
-- Used AI to help structure the React components and handle state management.
-- AI assisted in writing API integration code with Axios.
-- AI helped with CSS styling for responsiveness.
+I used AI tools during this project mainly for support and guidance, not as a replacement for my own work. AI helped me with things like structuring some React components, organizing state management patterns, and writing a few boilerplate sections such as Axios API functions. I also used it to debug certain issues and get ideas for improving responsiveness in the UI.
+
+However, all core logic—especially the authentication flow, authorization rules, task CRUD functionality, and overall application wiring—was fully implemented, reviewed, and understood by me. I made sure I knew exactly how everything works, and I manually tested the complete system end-to-end.
+
 
 ## Known Issues
 
