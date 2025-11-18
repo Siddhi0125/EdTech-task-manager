@@ -118,3 +118,6 @@ However, all core logic—especially the authentication flow, authorization rule
 - Enhance UI with a CSS framework like Tailwind CSS.
 - Add unit and integration tests.
 - Implement deployment to a platform like Render or Heroku.
+
+## Video link
+https://drive.google.com/file/d/1pL8Cgox7FFv_JOcQeAi1mP9rJ92NEC-w/view?usp=drive_link
