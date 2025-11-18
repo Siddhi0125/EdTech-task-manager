@@ -120,4 +120,4 @@ However, all core logic—especially the authentication flow, authorization rule
 - Implement deployment to a platform like Render or Heroku.
 
 ## Video link
-https://drive.google.com/file/d/1pL8Cgox7FFv_JOcQeAi1mP9rJ92NEC-w/view?usp=drive_link
+https://drive.google.com/file/d/1oNo8W8UJVF_PC2m0EefT2xKlBSq3bgUr/view?usp=sharing
